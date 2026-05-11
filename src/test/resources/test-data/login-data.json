@@ -1,0 +1,16 @@
+{
+  "username": "Abdallah",
+  "Invalidusername": "Abdallah123",
+  "password": "Abdallah",
+  "Invalidpassword": "Abdallah12",
+  "emptyusername": "",
+  "emptypassword": "",
+  "messages":
+  {
+    "AlertSuccess" : "Sign up successful.",
+    "AlertUserAlreadyExists" : "This user already exist.",
+    "AlertEmptyData": "Please fill out Username and Password.",
+    "AlertErrorPasswordData": "Wrong password.",
+    "AlertErrorUsernameData": "User does not exist."
+  }
+}

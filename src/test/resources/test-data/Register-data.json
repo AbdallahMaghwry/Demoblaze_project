@@ -1,0 +1,12 @@
+{
+  "username": "Abdallah",
+  "password": "Abdallah",
+  "emptyusername": "",
+  "emptypassword": "",
+  "messages":
+  {
+    "AlertSuccess" : "Sign up successful.",
+    "AlertUserAlreadyExists" : "This user already exist.",
+    "AlertEmptyData": "Please fill out Username and Password."
+  }
+}
