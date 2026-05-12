@@ -18,6 +18,12 @@ public class Verification extends BaseAssertion {
     }
 
     @Override
+    protected void AssertNUMEquals(int actual, int expected, String message) {
+        Assert.assertEquals(actual, expected, message);
+    }
+
+
+    @Override
     protected void AssertTrue(boolean condition, String message) {
         Assert.assertTrue(condition, message);
     }

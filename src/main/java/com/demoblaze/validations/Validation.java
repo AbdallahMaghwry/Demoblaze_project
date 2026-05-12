@@ -25,6 +25,12 @@ public class Validation extends BaseAssertion {
     }
 
     @Override
+    protected void AssertNUMEquals(int actual, int expected, String message) {
+        used= true;
+        Assert.assertEquals(actual, expected, message);
+    }
+
+    @Override
     protected void AssertTrue(boolean condition, String message) {
         used= true;
         Assert.assertTrue(condition, message);

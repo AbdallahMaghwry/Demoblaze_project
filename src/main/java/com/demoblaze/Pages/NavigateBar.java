@@ -8,8 +8,10 @@ import org.openqa.selenium.By;
 
 public class NavigateBar {
     private GUIDriver driver;
+
     public NavigateBar(GUIDriver driver) {
         this.driver = driver;
+
     }
 
 

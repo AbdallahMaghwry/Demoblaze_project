@@ -23,11 +23,17 @@ public abstract class  BaseAssertion {
     }
 
     protected abstract void AssertEquals(String actual, String expected, String message);
+    protected abstract void AssertNUMEquals(int actual, int expected, String message);
 
     protected abstract void AssertTrue(boolean condition, String message);
 
     protected abstract void AssertFalse(boolean condition, String message);
 
+    //check equals
+    public BaseAssertion isNUMEquals(int actual, int expected, String message) {
+        AssertNUMEquals(actual, expected, message);
+        return this;
+    }
 
     //check equals
     public BaseAssertion isEquals(String actual, String expected, String message) {

@@ -1,0 +1,29 @@
+{
+  "username": "Abdallah",
+  "password": "Abdallah",
+
+  "products":
+  {
+      "product_mobile": "Samsung galaxy s6",
+      "product_monitor": "Apple monitor 24",
+      "product_laptop": "Sony vaio i5"
+},
+  "categories":
+  {
+    "category_phones": "Phones",
+    "category_monitor": "Monitors",
+    "categories_laptop": "Laptops"
+  },
+
+  "messages":
+  {
+    "AlertSuccess" : "Sign up successful.",
+    "AlertUserAlreadyExists" : "This user already exist.",
+    "AlertEmptyData": "Please fill out Username and Password.",
+    "AlertErrorPasswordData": "Wrong password.",
+    "AlertErrorUsernameData": "User does not exist.",
+    "AlertProductAddedWithoutLogin" : "Product added",
+    "AlertProductAdded" : "Product added."
+  }
+
+}
