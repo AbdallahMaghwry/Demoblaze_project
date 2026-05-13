@@ -94,7 +94,7 @@ public class CartPage {
     public CartPage ValidateProductNameInCartPage(String expectedProductName) {
         driver.element().Ex_wait(NameOfProduct_Header);
         String actualProductName = driver.element().findElement(NameOfProduct_Header).getText();
-        driver.validation().isEquals(actualProductName, expectedProductName, "Product Name in Cart Page is not as expected The Actual Product Name :" + actualProductName + " The Expected Product Name :" + expectedProductName);
+        driver.verification().isEquals(actualProductName, expectedProductName, "Product Name in Cart Page is not as expected The Actual Product Name :" + actualProductName + " The Expected Product Name :" + expectedProductName);
         return this;
     }
     @Step("Validate Alert Product Added is Displayed")
@@ -128,7 +128,7 @@ public class CartPage {
 
 
     public void validateEmptyCartMessage() {
-        boolean actualMessage = driver.element().isElementNotDisplayed(TotalPriceOfProducts_Label);
+        boolean actualMessage = driver.element().IsElementNotDisplayed(TotalPriceOfProducts_Label);
         driver.verification().isTrue(actualMessage, "message: Total price label is displayed, cart is Not empty");
     }
 }

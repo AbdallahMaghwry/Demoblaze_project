@@ -106,6 +106,25 @@ public class LoginTest extends BaseTest {
                 .acceptAlert();
     }
 
+    @Description("Verify user can Logout After Login")
+    @Test
+    public void ValidLogoutTC(){
+        String timestamp = TimeManager.GetCurrentTimeStamp();
+        new NavigateBar(driver).clickSignUpButton()
+                .enterUsername(testData.GetJsonData("username") + timestamp)
+                .enterPassword(testData.GetJsonData("password"))
+                .clickSignupButton()
+                .validateAlertSuccessSignup(testData.GetJsonData("messages.AlertSuccess"))
+                .acceptAlert();
+        new NavigateBar(driver).clickLoginButton()
+                .enterUsername(testData.GetJsonData("username") + timestamp)
+                .enterPassword(testData.GetJsonData("password"))
+                .clickLoginButton()
+                .verifyUsernameVisible("Welcome "+testData.GetJsonData("username") + timestamp)
+                .navigateBar
+                .clickLogoutButton()
+                .verifyUsernameNotVisibleAfterLogout();
+    }
 
 
 

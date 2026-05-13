@@ -7,8 +7,10 @@ import org.openqa.selenium.By;
 
 public class LoginPage {
     private GUIDriver driver;
+    public NavigateBar navigateBar;
     public LoginPage(GUIDriver driver) {
         this.driver = driver;
+        this.navigateBar = new NavigateBar(driver);
     }
 
    //locators
@@ -17,6 +19,7 @@ public class LoginPage {
     private final By Login_Button = By.cssSelector(".modal-footer button[onclick='logIn()']");
     private final By Close_Button = By.xpath("//div[@class='modal-footer']//button[@onclick='logIn()']//preceding-sibling::button");
     private final By UserLabel= By.cssSelector("li>a[id='nameofuser']") ;
+    private final By Logout_Button = By.id("logout2");
 
 
 
@@ -51,6 +54,12 @@ public class LoginPage {
         driver.verification().isEquals(actualUsername,ExpectedName,"Username is not matched Actual: " + actualUsername + " Expected: " + ExpectedName);
         return this;
     }
+    @Step("verify that username label is NotDisplayed After Logout")
+    public LoginPage   verifyUsernameNotVisibleAfterLogout() {
+        boolean Isdisplayed = driver.element().IsElementNotDisplayed(Logout_Button);
+        driver.verification().isTrue(Isdisplayed,"Username is displayed");;
+        return this;
+    }
     @Step("Validate Alert Empty Data is Displayed")
     public LoginPage validateAlertEmptyData(String expectedMessage) {
         String actualMessage = driver.alert().getTextFromAlert();
@@ -63,6 +72,7 @@ public class LoginPage {
         driver.verification().isEquals(actualMessage, expectedMessage, "Alert Error Data message is not as expected The Actual Message :"+actualMessage +" The Expected Message :"+expectedMessage);
         return this;
     }
+
 
 
 

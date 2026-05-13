@@ -2,10 +2,7 @@ package com.demoblaze.utils.Actions;
 
 import com.demoblaze.utils.Logs.LogsManager;
 import com.demoblaze.utils.WaitManager;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Point;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.Wait;
@@ -161,21 +158,25 @@ public class ElementActions {
         wait.until(d -> d.findElement(element).isDisplayed());
         return this;
     }
+    //is element displayed
 
-    public boolean isElementNotDisplayed(By locator) {
-        return waitManager.FluentWait().until(d ->
-                {
-                    try {
-                        WebElement element = d.findElement(locator);
-                        scrollToElementJS(locator);
-                        boolean isDisplayed = element.isDisplayed();
-                        LogsManager.Info("Element " + locator + " is displayed: " + isDisplayed);
-                        return !isDisplayed;
-                    } catch (Exception e) {
-                        LogsManager.Info("Element " + locator + " is not displayed: " + e.getMessage());
-                        return true;
-                    }
+    public boolean IsElementNotDisplayed(By locator) {
+        try {
+            waitManager.FluentWait().until(d -> {
+                try {
+                    WebElement element = d.findElement(locator);
+                    scrollToElementJS(locator);
+                    boolean isNotDisplayed = !element.isDisplayed();
+                    LogsManager.Info("Element " + locator + " is displayed: " + !isNotDisplayed);
+                    return isNotDisplayed;
+                } catch (NoSuchElementException e) {
+                    LogsManager.Info("Element " + locator + " is not found: " + e.getMessage());
+                    return true; // مش موجود = مش ظاهر ✅
                 }
-        );
+            });
+            return true;
+        } catch (TimeoutException e) {
+            return false;
+        }
     }
 }

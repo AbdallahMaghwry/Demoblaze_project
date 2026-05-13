@@ -6,7 +6,8 @@
   {
       "product_mobile": "Samsung galaxy s6",
       "product_monitor": "Apple monitor 24",
-      "product_laptop": "Sony vaio i5"
+      "product_laptop": "Sony vaio i5",
+      "product2_laptop": "MacBook Pro"
 },
   "categories":
   {

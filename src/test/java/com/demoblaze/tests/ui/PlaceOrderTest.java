@@ -13,92 +13,18 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-
 @Epic("Demoblaze")
 @Feature("UI User Management")
-@Story("User Add product to cart")
+@Story("User Place Order")
 @Severity(SeverityLevel.CRITICAL)
 @Owner("Abdallah Mohammed")
 @UITest
-public class CartTest extends BaseTest {
+public class PlaceOrderTest extends BaseTest {
 
-    @Description("verify User Can Add Product To Cart Witout Login")
-    @Test
-    public void AddProductToCartWithoutLoginTC(){
-        new CartPage(driver)
-                .ClickProductName(testData.GetJsonData("products.product_mobile"))
-                .addProductToCart()
-                .validateAlertProductAdded(
-                        testData.GetJsonData("messages.AlertProductAddedWithoutLogin")
-                )
-                .acceptAlert();
-    }
 
-    @Description("verify User Can Add One Product To Cart With Login")
+    @Description("Verify user Can Place Order With Login")
     @Test
-    public void AddOneProductToCartWithLoginTC(){
-        String timestamp = TimeManager.GetCurrentTimeStamp();
-        new NavigateBar(driver).clickSignUpButton()
-                .enterUsername(testData.GetJsonData("username") + timestamp)
-                .enterPassword(testData.GetJsonData("password"))
-                .clickSignupButton()
-                .validateAlertSuccessSignup(testData.GetJsonData("messages.AlertSuccess"))
-                .acceptAlert();
-        new NavigateBar(driver).clickLoginButton()
-                .enterUsername(testData.GetJsonData("username") + timestamp)
-                .enterPassword(testData.GetJsonData("password"))
-                .clickLoginButton()
-                .verifyUsernameVisible("Welcome "+testData.GetJsonData("username") + timestamp);
-        new CartPage(driver)
-                .ClickProductName(testData.GetJsonData("products.product_mobile"))
-                .ValidateProductNameInCartPage(testData.GetJsonData("products.product_mobile"))
-                .addProductToCart()
-                .validateAlertProductAdded(
-                        testData.GetJsonData("messages.AlertProductAdded")
-                )
-                .acceptAlert();
-    }
-    @Description("Verify User Can Add Different Products To Cart Without Login")
-    @Test
-    public void AddDifferentProductToCartWithoutLoginTC(){
-        new CartPage(driver)
-                .ClickProductName(testData.GetJsonData("products.product_mobile"))
-                .ValidateProductNameInCartPage(testData.GetJsonData("products.product_mobile"))
-                .addProductToCart()
-                .validateAlertProductAdded(
-                        testData.GetJsonData("messages.AlertProductAddedWithoutLogin")
-                )
-                .acceptAlert()
-                .navigateBar
-                .clickHomeButton();
-        new CartPage(driver)
-                .ClickProductName(testData.GetJsonData("products.product_laptop"))
-                .ValidateProductNameInCartPage(testData.GetJsonData("products.product_laptop"))
-                .addProductToCart()
-                .validateAlertProductAdded(
-                        testData.GetJsonData("messages.AlertProductAddedWithoutLogin")
-                )
-                .acceptAlert()
-                .navigateBar
-                .clickHomeButton();
-        new CartPage(driver)
-                .clickCategory(testData.GetJsonData("categories.category_monitor"))
-                .ClickProductName(testData.GetJsonData("products.product_monitor"))
-                .addProductToCart()
-                .validateAlertProductAdded(
-                        testData.GetJsonData("messages.AlertProductAddedWithoutLogin")
-                )
-                .acceptAlert()
-                .navigateBar
-                .clickCartButton().validateTotalPrice(
-                        testData.GetJsonData("products.product_mobile"),
-                        testData.GetJsonData("products.product_laptop"),
-                        testData.GetJsonData("products.product_monitor")
-                );
-    }
-    @Description("Verify User Can Add Different Products To Cart With Login")
-    @Test
-    public void AddDifferentProductToCartWithLoginTC(){
+    public void ValidPlaceOrderOneProductWithLoginTC(){
         String timestamp = TimeManager.GetCurrentTimeStamp();
         new NavigateBar(driver).clickSignUpButton()
                 .enterUsername(testData.GetJsonData("username") + timestamp)
@@ -120,36 +46,25 @@ public class CartTest extends BaseTest {
                 )
                 .acceptAlert()
                 .navigateBar
-                .clickHomeButton();
-        new CartPage(driver)
-                .ClickProductName(testData.GetJsonData("products.product_laptop"))
-                .ValidateProductNameInCartPage(testData.GetJsonData("products.product_laptop"))
-                .addProductToCart()
-                .validateAlertProductAdded(
-                        testData.GetJsonData("messages.AlertProductAdded")
-                )
-                .acceptAlert()
-                .navigateBar
-                .clickHomeButton();
-        new CartPage(driver)
-                .clickCategory(testData.GetJsonData("categories.category_monitor"))
-                .ClickProductName(testData.GetJsonData("products.product_monitor"))
-                .addProductToCart()
-                .validateAlertProductAdded(
-                        testData.GetJsonData("messages.AlertProductAdded")
-                )
-                .acceptAlert()
-                .navigateBar
-                .clickCartButton().validateTotalPrice(
-                        testData.GetJsonData("products.product_mobile"),
-                        testData.GetJsonData("products.product_laptop"),
-                        testData.GetJsonData("products.product_monitor")
-                );
-    }
+                .clickCartButton()
+                .clickPlaceOrderButton()
+                .enterName(testData.GetJsonData("order.name"))
+                .enterCountry(testData.GetJsonData("order.country"))
+                .enterCity(testData.GetJsonData("order.city"))
+                .enterCreditCard(testData.GetJsonData("order.creditCard"))
+                .enterMonth(testData.GetJsonData("order.month"))
+                .enterYear(testData.GetJsonData("order.year"))
+                .clickPurchaseButton()
+                .validateSuccessPlaceOrderMessage(testData.GetJsonData("order.successMessagePlaceOrder_Label"))
+                .validateTotalPrice(testData.GetJsonData("products.Amount_mobile"))
+                .clickOKButton();
 
-    @Description("Verify User Can Delete Product From the Cart")
+
+
+    }
+    @Description("Verify user Can Place Order One Product Without Login")
     @Test
-    public void DeleteProductFromCartTC(){
+    public void ValidPlaceOrderOneProductWithoutLoginTC(){
         new CartPage(driver)
                 .ClickProductName(testData.GetJsonData("products.product_mobile"))
                 .ValidateProductNameInCartPage(testData.GetJsonData("products.product_mobile"))
@@ -160,40 +75,155 @@ public class CartTest extends BaseTest {
                 .acceptAlert()
                 .navigateBar
                 .clickCartButton()
-                .deleteProductFromCart(testData.GetJsonData("products.product_mobile"))
-                .validateEmptyCartMessage();
+                .clickPlaceOrderButton()
+                .enterName(testData.GetJsonData("order.name"))
+                .enterCountry(testData.GetJsonData("order.country"))
+                .enterCity(testData.GetJsonData("order.city"))
+                .enterCreditCard(testData.GetJsonData("order.creditCard"))
+                .enterMonth(testData.GetJsonData("order.month"))
+                .enterYear(testData.GetJsonData("order.year"))
+                .clickPurchaseButton()
+                .validateSuccessPlaceOrderMessage(testData.GetJsonData("order.successMessagePlaceOrder_Label"))
+                .validateTotalPrice(testData.GetJsonData("products.Amount_mobile"))
+                .clickOKButton();
+
     }
 
-    @Description("Verify User Can Add Product From Different page")
+    @Description("Verify user Can Place Order Without Login")
     @Test
-    public void VerifyUserCanAddProductFromDifferentPageTC()  {
+    public void ValidPlaceOrderDifferentProductsWithLoginTC() {
+        String timestamp = TimeManager.GetCurrentTimeStamp();
+        new NavigateBar(driver).clickSignUpButton()
+                .enterUsername(testData.GetJsonData("username") + timestamp)
+                .enterPassword(testData.GetJsonData("password"))
+                .clickSignupButton()
+                .validateAlertSuccessSignup(testData.GetJsonData("messages.AlertSuccess"))
+                .acceptAlert();
+        new NavigateBar(driver).clickLoginButton()
+                .enterUsername(testData.GetJsonData("username") + timestamp)
+                .enterPassword(testData.GetJsonData("password"))
+                .clickLoginButton()
+                .verifyUsernameVisible("Welcome "+testData.GetJsonData("username") + timestamp);
         new CartPage(driver)
                 .ClickProductName(testData.GetJsonData("products.product_mobile"))
                 .ValidateProductNameInCartPage(testData.GetJsonData("products.product_mobile"))
                 .addProductToCart()
                 .validateAlertProductAdded(
-                        testData.GetJsonData("messages.AlertProductAddedWithoutLogin")
+                        testData.GetJsonData("messages.AlertProductAdded")
                 )
                 .acceptAlert()
                 .navigateBar
-                .clickHomeButton()
-                .clickNextButton()//move to next page for add Another product
-
-                .ClickProductName(testData.GetJsonData("products.product2_laptop"))
-                .ValidateProductNameInCartPage(testData.GetJsonData("products.product2_laptop"))
+                .clickHomeButton();
+        new CartPage(driver)
+                .ClickProductName(testData.GetJsonData("products.product_laptop"))
+                .ValidateProductNameInCartPage(testData.GetJsonData("products.product_laptop"))
                 .addProductToCart()
                 .validateAlertProductAdded(
-                        testData.GetJsonData("messages.AlertProductAddedWithoutLogin")
+                        testData.GetJsonData("messages.AlertProductAdded")
                 )
-                .acceptAlert();
+                .acceptAlert()
+                .navigateBar
+                .clickHomeButton();
+        new CartPage(driver)
+                .clickCategory(testData.GetJsonData("categories.category_monitor"))
+                .ClickProductName(testData.GetJsonData("products.product_monitor"))
+                .addProductToCart()
+                .validateAlertProductAdded(
+                        testData.GetJsonData("messages.AlertProductAdded")
+                )
+                .acceptAlert()
+                .navigateBar
+                .clickCartButton().validateTotalPrice(
+                        testData.GetJsonData("products.product_mobile"),
+                        testData.GetJsonData("products.product_laptop"),
+                        testData.GetJsonData("products.product_monitor")
+                )
+                .clickPlaceOrderButton()
+                .enterName(testData.GetJsonData("order.name"))
+                .enterCountry(testData.GetJsonData("order.country"))
+                .enterCity(testData.GetJsonData("order.city"))
+                .enterCreditCard(testData.GetJsonData("order.creditCard"))
+                .enterMonth(testData.GetJsonData("order.month"))
+                .enterYear(testData.GetJsonData("order.year"))
+                .clickPurchaseButton()
+                .validateSuccessPlaceOrderMessage(testData.GetJsonData("order.successMessagePlaceOrder_Label"))
+                .validateTotalPrice(testData.GetJsonData("products.total_amount"))
+                .clickOKButton();
 
     }
+
+    @Description("Verify user Can't Place Order With Empty Data in All Fields")
+    @Test
+    public void InValidPlaceOrderWithEmptyData(){
+        String timestamp = TimeManager.GetCurrentTimeStamp();
+        new NavigateBar(driver).clickSignUpButton()
+                .enterUsername(testData.GetJsonData("username") + timestamp)
+                .enterPassword(testData.GetJsonData("password"))
+                .clickSignupButton()
+                .validateAlertSuccessSignup(testData.GetJsonData("messages.AlertSuccess"))
+                .acceptAlert();
+        new NavigateBar(driver).clickLoginButton()
+                .enterUsername(testData.GetJsonData("username") + timestamp)
+                .enterPassword(testData.GetJsonData("password"))
+                .clickLoginButton()
+                .verifyUsernameVisible("Welcome "+testData.GetJsonData("username") + timestamp);
+        new CartPage(driver)
+                .ClickProductName(testData.GetJsonData("products.product_mobile"))
+                .ValidateProductNameInCartPage(testData.GetJsonData("products.product_mobile"))
+                .addProductToCart()
+                .validateAlertProductAdded(
+                        testData.GetJsonData("messages.AlertProductAdded")
+                )
+                .acceptAlert()
+                .navigateBar
+                .clickHomeButton();
+        new CartPage(driver)
+                .ClickProductName(testData.GetJsonData("products.product_laptop"))
+                .ValidateProductNameInCartPage(testData.GetJsonData("products.product_laptop"))
+                .addProductToCart()
+                .validateAlertProductAdded(
+                        testData.GetJsonData("messages.AlertProductAdded")
+                )
+                .acceptAlert()
+                .navigateBar
+                .clickHomeButton();
+        new CartPage(driver)
+                .clickCategory(testData.GetJsonData("categories.category_monitor"))
+                .ClickProductName(testData.GetJsonData("products.product_monitor"))
+                .addProductToCart()
+                .validateAlertProductAdded(
+                        testData.GetJsonData("messages.AlertProductAdded")
+                )
+                .acceptAlert()
+                .navigateBar
+                .clickCartButton().validateTotalPrice(
+                        testData.GetJsonData("products.product_mobile"),
+                        testData.GetJsonData("products.product_laptop"),
+                        testData.GetJsonData("products.product_monitor")
+                )
+                .clickPlaceOrderButton()
+                .clickPurchaseButton()
+                .validatePlaceOrderAlertEmptyData(
+                        testData.GetJsonData("messages.AlertEmptyDataPlaceOrder"));
+
+    }
+
+
+
+
+
+
+
+
+
+
+
 
 
     //configuration
     @BeforeClass
     protected void precondition(){
-        testData = new JsonReader("Cart-data");
+        testData = new JsonReader("PlaceOrder-data");
     }
 
     @BeforeMethod

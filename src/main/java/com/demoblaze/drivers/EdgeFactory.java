@@ -37,7 +37,7 @@ public class EdgeFactory extends AbstractDriver{
         options.setCapability(CapabilityType.ENABLE_DOWNLOADS, true);
        //options.addExtensions(haramBlurExtension);
        options.setAcceptInsecureCerts(true);
-       options.setPageLoadStrategy(PageLoadStrategy.EAGER);
+       options.setPageLoadStrategy(PageLoadStrategy.NORMAL);
 
        switch (PropertyReader.GetProperty("executionType"))
        {

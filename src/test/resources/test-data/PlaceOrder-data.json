@@ -1,0 +1,48 @@
+{
+  "username": "Abdallah",
+  "password": "Abdallah",
+
+  "products":
+  {
+    "product_mobile": "Samsung galaxy s6",
+    "Amount_mobile":"360",
+    "product_monitor": "Apple monitor 24",
+    "Amount_monitor": "400",
+    "product_laptop": "Sony vaio i5",
+    "Amount_laptop": "790",
+    "total_amount": "1550"
+  },
+  "categories":
+  {
+    "category_phones": "Phones",
+    "category_monitor": "Monitors",
+    "categories_laptop": "Laptops"
+  },
+
+  "messages":
+  {
+    "AlertSuccess" : "Sign up successful.",
+    "AlertUserAlreadyExists" : "This user already exist.",
+    "AlertEmptyData": "Please fill out Username and Password.",
+    "AlertErrorPasswordData": "Wrong password.",
+    "AlertErrorUsernameData": "User does not exist.",
+    "AlertProductAddedWithoutLogin" : "Product added",
+    "AlertProductAdded" : "Product added.",
+    "AlertEmptyDataPlaceOrder": "Please fill out Name and Creditcard."
+  },
+  "order":
+  {
+    "name" : "Abdallah Mohamed",
+    "country" : "Egypt",
+    "city": "Cairo",
+    "creditCard": "1234567890123456",
+    "month": "12",
+    "year" : "2026",
+    "successMessagePlaceOrder_Label" : "Thank you for your purchase!"
+  },
+    "homePage":
+    {
+        "homePageTitle": "STORE",
+        "homePageUrl": "https://www.demoblaze.com/index.html"
+    },
+}
