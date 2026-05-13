@@ -70,7 +70,7 @@ public class NavigateBar {
     public CartPage clickNextButton() {
 
         try {
-            Thread.sleep(200);
+            Thread.sleep(300);
             driver.element().click(NextButton);
             return new CartPage(driver);
         } catch (InterruptedException e) {

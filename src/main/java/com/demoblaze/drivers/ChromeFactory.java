@@ -21,7 +21,6 @@ public class ChromeFactory extends AbstractDriver{
         options.addArguments("--disable-notifications");
         options.addArguments("--disable-popup-blocking");
         options.addArguments("--disable-infobars");
-        options.addExtensions(haramBlurExtension);
         options.setAcceptInsecureCerts(true);
         options.setPageLoadStrategy(PageLoadStrategy.EAGER);
 
